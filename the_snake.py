@@ -62,9 +62,10 @@ def handle_keys(game_object):
 
 class GameObject:
     """
-    Базовый класс игры. 
+    Базовый класс игры.
     Он содержит общие атрибуты игровых объектов.
     """
+
     def __init__(self, bg_color=None, fg_color=None):
         """
         Инициализирует базовые атрибуты объекта,
@@ -86,6 +87,7 @@ class Apple(GameObject):
     Класс описывающий яблоко и действия с ним.
     Яблоко должно отображаться в случайных клетках игрового поля.
     """
+
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
         self.body_color = APPLE_COLOR
@@ -106,10 +108,12 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    """Класс описывающий змейку и её поведение.
+    """
+       Класс описывающий змейку и её поведение.
        Этот класс управляет её движением, отрисовкой,
        а также обрабатывает действия пользователя.
     """
+
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
