@@ -61,11 +61,13 @@ def handle_keys(game_object):
 
 
 class GameObject:
-    """Базовый класс игры. Он содержит общие атрибуты игровых объектов."""
-
+    """
+    Базовый класс игры. 
+    Он содержит общие атрибуты игровых объектов.
+    """
     def __init__(self, bg_color=None, fg_color=None):
         """
-        Инициализирует базовые атрибуты объекта, 
+        Инициализирует базовые атрибуты объекта,
         такие как его позиция и цвет.
         """
         self.body_color = bg_color
@@ -84,21 +86,19 @@ class Apple(GameObject):
     Класс описывающий яблоко и действия с ним.
     Яблоко должно отображаться в случайных клетках игрового поля.
     """
-    
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
         self.body_color = APPLE_COLOR
         self.randomize_position()
 
     def draw(self):
+        """Метод для отрисовки объекта на игровом поле."""
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def randomize_position(self):
-        """
-        Устанавливает случайное положение яблока на игровом поле.
-        """
+        """Устанавливает случайное положение яблока на игровом поле."""
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
@@ -110,7 +110,6 @@ class Snake(GameObject):
        Этот класс управляет её движением, отрисовкой,
        а также обрабатывает действия пользователя.
     """
-
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
@@ -121,6 +120,7 @@ class Snake(GameObject):
         self.body_color = SNAKE_COLOR
 
     def draw(self):
+        """Метод для отрисовки объекта на игровом поле."""
         for position in self.positions:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
