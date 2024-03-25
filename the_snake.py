@@ -1,4 +1,4 @@
-"""Вызываем из библиотеки random модули randint и choice"""
+"""Вызываем из библиотеки random модули randint и choice."""
 from random import choice, randint
 
 import pygame
@@ -64,18 +64,27 @@ class GameObject:
     """Базовый класс игры. Он содержит общие атрибуты игровых объектов."""
 
     def __init__(self, bg_color=None, fg_color=None):
+        """
+        Инициализирует базовые атрибуты объекта, 
+        такие как его позиция и цвет.
+        """
         self.body_color = bg_color
         self.figure_color = fg_color
         self.position = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
 
     def draw(self):
-        """Заготовка метода для отрисовки
-        объекта на игровом поле."""
+        """
+        Заготовка метода для отрисовки
+        объекта на игровом поле.
+        """
 
 
 class Apple(GameObject):
-    """Класс описывающий яблоко и действия с ним.
-    Яблоко должно отображаться в случайных клетках игрового поля."""
+    """
+    Класс описывающий яблоко и действия с ним.
+    Яблоко должно отображаться в случайных клетках игрового поля.
+    """
+    
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
         self.body_color = APPLE_COLOR
@@ -87,7 +96,9 @@ class Apple(GameObject):
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def randomize_position(self):
-        """Устанавливает случайное положение яблока на игровом поле."""
+        """
+        Устанавливает случайное положение яблока на игровом поле.
+        """
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
@@ -96,8 +107,9 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс описывающий змейку и её поведение.
-    Этот класс управляет её движением, отрисовкой,
-    а также обрабатывает действия пользователя."""
+       Этот класс управляет её движением, отрисовкой,
+       а также обрабатывает действия пользователя.
+    """
 
     def __init__(self, bg_color=None, fg_color=None):
         super().__init__(bg_color, fg_color)
@@ -125,9 +137,10 @@ class Snake(GameObject):
             pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
 
     def reset(self):
-        """Сбрасывает змейку в начальное состояние
-            после столкновения с собой."""
-
+        """
+        Сбрасывает змейку в начальное состояние
+        после столкновения с собой.
+        """
         start_direction = [UP, DOWN, LEFT, RIGHT]
         self.last = None
         self.length = 1
@@ -135,8 +148,10 @@ class Snake(GameObject):
         self.direction = choice(start_direction)
 
     def get_head_position(self):
-        """Возвращает позицию головы змейки
-        (первый элемент в списке positions)."""
+        """
+        Возвращает позицию головы змейки
+        (первый элемент в списке positions).
+        """
         return self.positions[0]
 
     def update_direction(self):
@@ -146,11 +161,12 @@ class Snake(GameObject):
             self.next_direction = None
 
     def move(self):
-        """Обновляет позицию змейки (координаты каждой секции),
-            добавляя новую голову в начало списка positions и
-            удаляя последний элемент,
-            если длина змейки не увеличилась."""
-
+        """
+        Обновляет позицию змейки (координаты каждой секции),
+        добавляя новую голову в начало списка positions и
+        удаляя последний элемент,
+        если длина змейки не увеличилась.
+        """
         first_elem_dx, first_elem_dy = self.get_head_position()
         dx, dy = self.direction
         first_elem_dx += dx * GRID_SIZE
