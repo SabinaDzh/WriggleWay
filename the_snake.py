@@ -72,7 +72,7 @@ class GameObject:
         self.body_color = bg_color
         self.figure_color = fg_color
         self.position = [SCREEN_CENTR]
-        
+
     def draw(self):
         """
         Заготовка метода для отрисовки
@@ -86,7 +86,7 @@ class Apple(GameObject):
     Класс описывающий яблоко и действия с ним.
     Яблоко должно отображаться в случайных клетках игрового поля.
     """
-    
+
     def __init__(self, bg_color=APPLE_COLOR, fg_color=BORDER_COLOR):
         super().__init__(bg_color, fg_color)
         self.position = SCREEN_CENTR
@@ -94,14 +94,13 @@ class Apple(GameObject):
         self.randomize_position(position)
 
     def draw(self):
+        """Метод для отрисовки объекта на игровом поле."""
         rect = pg.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pg.draw.rect(screen, self.body_color, rect)
         pg.draw.rect(screen, self.figure_color, rect, 1)
 
     def randomize_position(self, coordinate_center):
-        """
-        Устанавливает случайное положение яблока на игровом поле.
-        """
+        """Устанавливает случайное положение яблока на игровом поле."""
         while self.position in coordinate_center:
             self.position = (
                 randint(0, GRID_WIDTH - 1) * GRID_SIZE,
@@ -110,9 +109,10 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    """Класс описывающий змейку и её поведение.
-       Этот класс управляет её движением, отрисовкой,
-       а также обрабатывает действия пользователя.
+    """
+    Класс описывающий змейку и её поведение.
+    Этот класс управляет её движением, отрисовкой,
+    а также обрабатывает действия пользователя.
     """
 
     def __init__(self, bg_color=SNAKE_COLOR, fg_color=BORDER_COLOR):
@@ -133,16 +133,20 @@ class Snake(GameObject):
         pg.draw.rect(screen, self.figure_color, head_rect, 1)
 
     def reset(self):
-        """Сбрасывает змейку в начальное состояние
-            после столкновения с собой."""
+        """
+        Сбрасывает змейку в начальное состояние
+        после столкновения с собой.
+        """
         start_direction = [UP, DOWN, LEFT, RIGHT]
         self.length = 1
         self.positions = [(SCREEN_CENTR)]
         self.direction = choice(start_direction)
 
     def get_head_position(self):
-        """Возвращает позицию головы змейки
-        (первый элемент в списке positions)."""
+        """
+        Возвращает позицию головы змейки
+        (первый элемент в списке positions).
+        """
         return self.positions[0]
 
     def update_direction(self):
