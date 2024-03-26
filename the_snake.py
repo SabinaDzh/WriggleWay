@@ -86,7 +86,7 @@ class Apple(GameObject):
     Класс описывающий яблоко и действия с ним.
     Яблоко должно отображаться в случайных клетках игрового поля.
     """
-    
+
     def __init__(self, bg_color=APPLE_COLOR, fg_color=BORDER_COLOR):
         super().__init__(bg_color, fg_color)
         self.randomize_position([(SCREEN_CENTR)])
