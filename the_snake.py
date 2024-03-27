@@ -90,8 +90,7 @@ class Apple(GameObject):
     def __init__(self, bg_color=APPLE_COLOR, fg_color=BORDER_COLOR):
         super().__init__(bg_color, fg_color)
         self.position = SCREEN_CENTR
-        position = [(SCREEN_CENTR)]
-        self.randomize_position(position)
+        self.randomize_position()
 
     def draw(self):
         """Метод для отрисовки объекта на игровом поле."""
@@ -99,7 +98,7 @@ class Apple(GameObject):
         pg.draw.rect(screen, self.body_color, rect)
         pg.draw.rect(screen, self.figure_color, rect, 1)
 
-    def randomize_position(self, coordinate_center):
+    def randomize_position(self, coordinate_center=[(SCREEN_CENTR)]):
         """Устанавливает случайное положение яблока на игровом поле."""
         while self.position in coordinate_center:
             self.position = (
@@ -192,7 +191,7 @@ def main():
 
         if snake.get_head_position() in snake.positions[2:]:
             snake.reset()
-            apple.randomize_position(snake.positions)
+            apple.randomize_position()
 
         screen.fill(BOARD_BACKGROUND_COLOR)
         apple.draw()
